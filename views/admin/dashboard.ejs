@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Admin Panel</h2>
+        </div>
+        <ul class="menu">
+            <li><a href="#" onclick="showSection('add')">Add Products</a></li>
+            <li><a href="#" onclick="showSection('product')">Products</a></li>
+            <li><a href="#" onclick="showSection('order')">Orders</a></li>
+            <li><a href="#" >Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Navbar -->
+        <header><h1>Dashboar</h1></header>
+
+
+        <!-- orders -->
+<section class="section" id="order">
+4
+</section>
+
+
+<section class="section" id="product">
+5
+</section>
+          <!-- new product -->
+<section class="section" id="add">
+    <h3> add new product</h3>
+    <form action="#" method="GET" enctype="multipart/form-data">
+                
+        <!-- Product Name -->
+        <div class="form">
+            <label for="productName">Product Name</label>
+            <input type="text" id="productName" name="productName" required>
+        </div>
+
+        <!-- Product Description -->
+        <div class="form">
+            <label for="productDescription">Product Description</label>
+            <textarea id="productDescription" name="productDescription" rows="18" required></textarea>
+        </div>
+
+        <!-- Product Price -->
+        <div class="form">
+            <label for="productPrice">Price ($)</label>
+            <input type="number" id="productPrice" name="productPrice" required>
+        </div>
+
+        <!-- Product Category -->
+
+        <div class="form">
+            <label for="productCategory">Category</label>
+            <select id="productCategory" name="productCategory" required>
+                <option value="">Select Category</option>
+                <option value="electronics">Electronics</option>
+                <option value="clothing">Clothing</option>
+                <option value="home-garden">Home & Garden</option>
+                <option value="beauty-health">Beauty & Health</option>
+            </select>
+        </div>
+
+        <!-- Product Image -->
+        <div class="form">
+            <label for="productImage">Product Image</label>
+            <input type="file" name="productImage" accept="image/*" required>
+        </div>
+
+        <!-- Product Stock -->
+        <div class="form">
+            <label for="productStock">Stock Quantity</label>
+            <input type="number" name="productStock" required>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Add Product</button>
+    </form>
+</section>
+
+
+</div>
+</body>
+
+<script>
+    function showSection(sectionId) {
+        // Hide all sections
+        let sections = document.querySelectorAll('.section');
+        sections.forEach(function(section){
+            section.classList.remove('active');
+        });
+
+        // Show the selected section
+        let activeSection = document.getElementById(sectionId);
+        activeSection.classList.add('active');
+    }
+
+    // Show the "Orders" section by default
+    showSection('order');
+</script>
+
+
+</html>
