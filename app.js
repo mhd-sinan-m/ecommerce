@@ -1,6 +1,9 @@
 const express = require("express");
 const session = require('express-session');
+const colours = require("./utilities/colours")
 require('dotenv').config()
+
+
 
 const dbConnect = require("./config/connect")
 const app = express()
@@ -11,7 +14,7 @@ app.set('view engine','ejs')
 
 const port = process.env.PORT
 
-app.use(express.static('./public'))
+app.use("/",express.static('./public'))
 
 app.use(session({
     secret: 'your-secret-key',
@@ -26,10 +29,14 @@ app.use('/admin', require('./routes/admin')) //admin
 
 dbConnect().then(() => {
     app.listen(port, () => {
-        console.log('server running ', port)
+        console.log(colours.magenta + 'server running ' + colours.black, port)
     })
 }).catch((err) => {
     console.error('connection failed', err)
 }); 
+
+
+
+
 
 console.log("i am alive");
