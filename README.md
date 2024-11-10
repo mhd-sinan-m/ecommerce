@@ -12,4 +12,7 @@
 
 ## Git 
 ``` 
+git clone https://github.com/mhd-sinan-m/first-project.git
+cd first-project
+```
 
