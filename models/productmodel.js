@@ -19,7 +19,7 @@ const productSchema = mongoose.Schema({
     },
     productImage: {
         type: String,
-        default: 'user'
+        default:""
     }
 })
 productModel = mongoose.model("signupModel", productSchema)

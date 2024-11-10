@@ -64,7 +64,7 @@ const signinGet = (req, res) => {
         res.redirect(`/admin`)
     }
     else if (req.session.user) {
-
+        res.redirect(`/`)
     }
     else {
         res.render("client/signin")
@@ -76,7 +76,7 @@ const signinPost = async (req, res) => {
     const existU = await signupModel.findOne({ username })
     console.log(existU)
     const compaireP =  await bcrypt.compare(password, existU.password)
-    const admin = existU.role
+    const role = existU.role
 
     try {
         if (username === "" || password === "")
@@ -86,12 +86,12 @@ const signinPost = async (req, res) => {
             res.status(404).render("client/error", { errr: "Incorrect PASSWORD or USERNAME" })
         }
 
-        else if (admin === 'admin') {
+        else if (role === 'admin') {
             console.log(existU.username)
             req.session.admin = true;
             res.redirect(`/admin/`)
         }
-        else if (admin === 'user') {
+        else if (role === 'user') {
             req.session.user = true;
             res.redirect(`/?username=${existU.username}`)
         }

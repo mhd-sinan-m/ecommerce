@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express()
-const authcontroller = require("../controllers/authcontroller")
+const authcontroller = require("../controllers/authController")
 const path = require('path');
 
 console.log( path.join(__filename, 'views', 'client'));
