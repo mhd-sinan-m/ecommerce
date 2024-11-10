@@ -10,7 +10,7 @@ const productSchema = mongoose.Schema({
         required: true
     },
     productPrice: {
-        type: String,
+        type: Number,
         required: true
     },
     productCategory: {
@@ -20,8 +20,12 @@ const productSchema = mongoose.Schema({
     productImage: {
         type: String,
         default:""
+    },
+    productStock: {
+        type:Number,
+        required:true
     }
 })
-productModel = mongoose.model("signupModel", productSchema)
+productModel = mongoose.model("productModel", productSchema)
 module.exports = productModel
 

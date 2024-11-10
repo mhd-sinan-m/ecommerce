@@ -4,7 +4,7 @@ const adminSession=(req,res,next)=>{
     next();
   } else {
     res.status(401).redirect('/signin'); 
-    window.alert('you are not admin')
+    // window.alert('you are not admin')
   }
 }
 

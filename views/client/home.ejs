@@ -5,14 +5,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ShopNow - eCommerce Store</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.14/base.min.css">
   <link href="/styles/output.css" rel="stylesheet">
+  <script>
+    function warn(message){
+        const alertElement = document.getElementById("main");
+        alertElement.querySelector('.elem').innerHTML = message;
+        alertElement.classList.remove("hidden");
+    }
   </script>
 </head>
 
 <body class="h-"> 
+  <%- include('layout/alert')%>
   <!-- Header / Navigation Bar -->
   
-  <header style="border-bottom: 1px solid #bdc5d1; position: fixed; width: 100%;">
+  <header class="" style="border-bottom: 1px solid #bdc5d1; position: fixed; width: 100%;">
   <% const current="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"%>
   <% const defaul="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"%>
   <% const curr="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" %>
@@ -26,8 +34,8 @@
     <div class="absolute right-[40%] bottom-[10%]">
       <h1 class="text-2xl">Welcome to ShopNow</h1>
       <p>Your one-stop shop for the latest products</p>
-      <a href="#" class="btn">Shop Now</a>
-
+      <a href="#" class="btn">Shop Now</a><br>
+      <button onclick="warn('This is your dynamic alert message!')">Show Alert</button>
     </div>
 </div>
   <!-- Featured Products Section -->

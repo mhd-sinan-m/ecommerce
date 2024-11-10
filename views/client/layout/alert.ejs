@@ -1,0 +1,20 @@
+<div role="alert" id="main"
+    class="mt-28 hidden absolute right-1/2 z-[1] translate-x-1/2 flex w-80 p-3 text-base text-white bg-red-500/10 rounded-md">
+    <div class="elem lex flex-wrap items-center justify-center mr-[px]">
+        
+    </div>
+    <button onclick="n()"
+        class="flex items-center justify-center transition-all w-8 h-8 rounded-md text-white hover:bg-white/10 active:bg-red-500 absolute top-1.5 right-1"
+        type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5"
+            stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+</div>
+<script>
+    function n() {
+        let element = document.getElementById("main");
+        element.classList.add("hidden");
+    }
+</script>
