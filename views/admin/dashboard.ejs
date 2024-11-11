@@ -9,12 +9,18 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
+    <link href="../../public/styles/output.css" rel="stylesheet">
 </head>
+<style>
+    .trsh-edit {
+        margin-top: -4.25rem;
+    }
+</style>
 
-<body class="flex h-screen bg-gray-100 font-roboto">
+<body class="flex h-screen bg-gray-100 font-['roboto',sanserif]">
 
     <!-- Sidebar -->
     <div class="sidebar w-64 bg-gray-800 text-gray-200 h-full p-5">
@@ -22,55 +28,90 @@
             <h2 class="text-xl font-bold">Admin Panel</h2>
         </div>
         <ul class="menu space-y-4">
-            <li><a href="#" onclick="showSection('add')" class="block text-center text-base hover:bg-gray-700 p-3 rounded">Add Products</a></li>
-            <li><a href="#" onclick="showSection('product')" class="block text-center text-base hover:bg-gray-700 p-3 rounded">Products</a></li>
-            <li><a href="#" onclick="showSection('order')" class="block text-center text-base hover:bg-gray-700 p-3 rounded">Orders</a></li>
-            <li><a href="#" class="block text-center hover:bg-gray-700 p-3 text-base rounded">Logout</a></li>
+            <li><a href="#" onclick="showSection('add')"
+                    class="block text-center text-base hover:bg-green-500 p-3 rounded">Add Products</a></li>
+            <li><a href="#" onclick="showSection('product')"
+                    class="block text-center text-base hover:bg-green-500 p-3 rounded">Products</a></li>
+            <li><a href="#" onclick="showSection('order')"
+                    class="block text-center text-base hover:bg-green-500 p-3 rounded">Orders</a></li>
+            <li><a href="/logout" class="block text-center hover:bg-green-500 p-3 text-base rounded">Logout</a></li>
         </ul>
     </div>
 
     <!-- Main Content -->
     <div class="main-content flex-1 p-6">
-        <!-- Top Navbar -->
-        <header><h1 class="text-2xl font-bold mb-6">Dashboard</h1></header>
+        <!-- HEADER-->
+        <header>
+            <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
+        </header>
 
-        <!-- Orders Section -->
-        <section class="section hidden bg-white p-6 rounded-lg shadow" id="order">
+        <!-- ORDER -->
+        <section class="section hidden bg-white p-6 rounded-md" id="order">
             <p>Order Details Here</p>
         </section>
 
-        <!-- Products Section -->
-        <section class="section hidden bg-white p-6 rounded-lg shadow" id="product">
-            <p>Product Details Here</p>
+        <!-- PRODUCT -->
+        <section class="section hidden bg-white p-6 rounded-md" id="product">
+            <h1 class="text-xl font-bold mb-2 text-center">P R O D U C T s</h1>
+            <div class="flex flex-col gap-4 p-3 h-auto">
+                <% products.forEach((p)=> { %>
+                    <div title="<%= p.description %>"
+                        class="bg-green-300 text-xl p-2 md:h-auto rounded-md flex items-center text-black/65">
+                        <img src="<%= p.image %>" alt="<%= p.name %>" class="aspect-square object-cover h-20 w-20">
+                        <h2 class="text-lg font-bold m-2 mr-auto">
+                            <%= p.name %>
+                        </h2>
+                        <div class="flex items-center md:w-40 sm:w-9">Cate: <%= p.category %>
+                        </div>
+                        <div class="flex items-center md:w-24 sm:w-6">Stock: <%= p.stock %>
+                        </div>
+                        <div class="flex items-center md:w-24 sm:w-6">Rupees: <%= p.price %>
+                        </div>
+                        <button class="trsh-edit" onclick="deleteProduct('<%= p.code %>')">
+                            <i class="fa-solid fa-trash-can"></i>&nbsp;
+                        </button>
+                        <a class="trsh-edit" href="<%= '/admin/product/' + p.code %>">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </div>
+                    <% }) %>
+            </div>
+
+
         </section>
 
-        <!-- Add New Product Section -->
-        <section class="section hidden bg-white p-6 rounded-lg shadow" id="add">
+        <!-- Add PRODUCT -->
+        <section class="section hidden bg-white p-6 rounded-md" id="add">
             <h3 class="text-xl font-bold mb-6 text-center">Add New Product</h3>
-            <form action="product" method="POST">
-                
+            <form action="addproduct" method="POST">
+
                 <!-- Product Name -->
                 <div class="form mb-4">
                     <label for="productName" class="block font-semibold mb-2 text-base">Product Name</label>
-                    <input type="text" id="productName" name="productName" class="w-full p-3 border border-gray-300 rounded" required>
+                    <input type="text" id="productName" name="name" class="w-full p-3 border border-gray-300 rounded"
+                        required>
                 </div>
 
                 <!-- Product Description -->
                 <div class="form mb-4">
-                    <label for="productDescription" class="block font-semibold text-base mb-2">Product Description</label>
-                    <textarea id="productDescription" name="productDescription" rows="5" class="w-full p-3 border border-gray-300 rounded resize-none" required></textarea>
+                    <label for="productDescription" class="block font-semibold text-base mb-2">Product
+                        Description</label>
+                    <textarea id="productDescription" name="description" rows="5"
+                        class="w-full p-3 border border-gray-300 rounded resize-none" required></textarea>
                 </div>
 
                 <!-- Product Price -->
                 <div class="form mb-4">
                     <label for="productPrice" class="block font-semibold text-base mb-2">Price ($)</label>
-                    <input type="number" id="productPrice" name="productPrice" class="w-full p-3 border border-gray-300 rounded" required>
+                    <input type="number" id="productPrice" name="price"
+                        class="w-full p-3 border border-gray-300 rounded" required>
                 </div>
 
                 <!-- Product Category -->
                 <div class="form mb-4">
                     <label for="productCategory" class="block font-semibold text-base mb-2">Category</label>
-                    <select id="productCategory" name="productCategory" class="w-full p-3 border border-gray-300 rounded" required>
+                    <select id="productCategory" name="category" class="w-full p-3 border border-gray-300 rounded"
+                        required>
                         <option value="">Select Category</option>
                         <option value="electronics">Electronics</option>
                         <option value="clothing">Clothing</option>
@@ -82,17 +123,23 @@
                 <!-- Product Image -->
                 <div class="form mb-4">
                     <label for="productImage" class="block font-semibold text-base mb-2">Product Image</label>
-                    <input type="file" name="productImage" accept="image/*" class="w-full p-3 border border-gray-300 rounded" required>
+                    <input type="file" name="image" accept="image/*" class="w-full p-3 border border-gray-300 rounded"
+                        required>
                 </div>
 
                 <!-- Product Stock -->
                 <div class="form mb-4">
                     <label for="productStock" class="block font-semibold text-base mb-2">Stock Quantity</label>
-                    <input type="number" name="productStock" class="w-full p-3 border border-gray-300 rounded" required>
+                    <input type="number" name="stock" class="w-full p-3 border border-gray-300 rounded" required>
+                </div>
+                <div class="form mb-4">
+                    <label for="productStock" class="block font-semibold text-base mb-2">Stock Quantity</label>
+                    <input type="text" name="code" class="w-full p-3 border border-gray-300 rounded" required>
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="w-full bg-gray-800 text-base text-white p-3 rounded hover:bg-gray-700">Add Product</button>
+                <button type="submit" class="w-full bg-gray-800 text-base text-white p-3 rounded hover:bg-gray-700">Add
+                    Product</button>
             </form>
         </section>
     </div>
@@ -101,7 +148,7 @@
         function showSection(sectionId) {
             // Hide all sections
             let sections = document.querySelectorAll('.section');
-            sections.forEach(function(section){
+            sections.forEach(function (section) {
                 section.classList.add('hidden');
             });
 
@@ -109,9 +156,16 @@
             let activeSection = document.getElementById(sectionId);
             activeSection.classList.remove('hidden');
         }
-
-        // Show the "Orders" section by default
         showSection('order');
+        function deleteProduct(code) {
+            fetch(`product/${code}`, {
+                method: 'DELETE',
+            })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => alert('Error deleting product'));
+        }
     </script>
 </body>
+
 </html>

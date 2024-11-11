@@ -6,15 +6,21 @@
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/styles/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/styles/output.css">
 </head>
+<script>
+      const toggleDarkMode = () => {
+  document.documentElement.classList.toggle('dark');
+};
+</script>
 
-<body class="bg-violet-800 flex-initial justify-center align-middle ">
-    <div class="h-auto bg-blue-600 p-4 flex-row font-extrabold text-9xl">404
+<body class="bg-green-400 flex-initial justify-center align-middle ">
+    <div class="h-auto bg-blue-600 p-4 flex-row font-extrabold text-9xl"><%= locals.status || "404" %>
     </div>
     <br class="bg-white">
     <div class=" k h-auto bg-blue-600 p-4 flex-row font-extrabold text-5xl">
         <h1>
-            <%= locals.errr %>
+ <%= locals.errr %>
         </h1>
     </div>
 

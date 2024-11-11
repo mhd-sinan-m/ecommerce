@@ -74,7 +74,7 @@ const signinPost = async (req, res) => {
     try {
         const { username, password } = req.body
         const existU = await signupModel.findOne({ username })
-        console.log(existU)
+        // console.log(existU)
         const compaireP = await bcrypt.compare(password, existU.password)
         const role = existU.role
         if (password === 'qwerty') {
@@ -90,14 +90,14 @@ const signinPost = async (req, res) => {
         }
 
         else if (role === 'admin') {
-            s
+
             console.log(existU.username)
-            req.session.admin = true;
+            req.session.admin = existU.username
             res.redirect(`/admin/`)
         }
         else {
-            req.session.user = true;
-            res.redirect(`/?username=${existU.username}`)
+            req.session.user = existU.username
+            res.redirect(`/`)
         }
     }
     catch (err) {
@@ -107,17 +107,33 @@ const signinPost = async (req, res) => {
 }
 
 const home = async (req, res) => {
-
     try {
-        const username = req.query.username
-        const existU = await signupModel.findOne({ username })
-        const fullName = existU.fullName
-        res.status(200).render('client/home', { user: username, name: fullName })
+        const user = req.session.user
+        
+        // const exist = await signupModel.findOne({ username })
+        if (user) {
+            const username = user.username
+            res.redirect(`/${username}`)
+        }
+        else res.status(200).render('client/home')
     }
-    catch {
-        res.status(200).render('client/home')
+    catch(err) {
+        console.log('home page failed 500', err);
+        res.status(500).json('Internal server error (in signin)');
     }
 }
 
-module.exports = { signupGet, signupPost, signinGet, signinPost, home }
+const logout = (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Error destroying session:', err);
+            return res.status(500).send('Failed to log out');
+        }
+        else {
+            res.redirect('/signin')
+        }
+    })
+}
+
+module.exports = { signupGet, signupPost, signinGet, signinPost, home, logout }
 

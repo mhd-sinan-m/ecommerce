@@ -15,7 +15,7 @@
     }
   </script>
 </head>
-
+<%# if (req.session.user){ %><%# include("layout/alert") %><%# } else { %> <%# "hello" %><%# } %>
 <body class="h-"> 
   <%- include('layout/alert')%>
   <!-- Header / Navigation Bar -->
