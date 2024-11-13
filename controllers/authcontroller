@@ -53,8 +53,8 @@ const signupPost = async (req, res) => {
         }
     }
     catch (err) {
-        console.error('SignUn failed 500', err);
-        res.status(500).json('Internal server erro(in signUP)');
+        console.error('SignUn failed 500', err)
+        res.status(500).json('Internal server erro(in signUP)')
     }
 }
 
@@ -95,14 +95,14 @@ const signinPost = async (req, res) => {
         }
         else {
             req.session.user = existU.username
-            console.log(req.session.user);
+            console.log(req.session.user)
             
             res.redirect(`/`)
         }
     }
     catch (err) {
-        console.log('Signin failed 500', err);
-        res.status(500).json('Internal server error (in signin)');
+        console.log('Signin failed 500', err)
+        res.status(500).json('Internal server error (in signin)')
     }
 }
 
@@ -118,16 +118,16 @@ const home = async (req, res) => {
          res.status(200).render('client/home')
     }
     catch(err) {
-        console.log('home page failed 500', err);
-        res.status(500).json('Internal server error (in signin)');
+        console.log('home page failed 500', err)
+        res.status(500).json('Internal server error (in signin)')
     }
 }
 
 const logout = (req, res) => {
     req.session.destroy((err) => {
         if (err) {
-            console.error('Error destroying session:', err);
-            return res.status(500).send('Failed to log out');
+            console.error('Error destroying session:', err)
+            return res.status(500).send('Failed to log out')
         }
         else {
             res.redirect('/signin')

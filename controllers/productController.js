@@ -15,7 +15,7 @@ const addProdectPost = async (req, res) => {
         return res.status(400).render("client/error", { errr: 'All fields are required' })
       }
  if (!req.file) {
-        return res.status(400).send('No file uploaded');
+        return res.status(400).send('No file uploaded')
     }
       const newProduct = new productModel({
         name,
@@ -73,7 +73,7 @@ const editProduct = async (req, res) => {
 }
 const product = async (req,res) => {
     const { code } = req.params;
-    const product = await productModel.findOne({code});
+    const product = await productModel.findOne({code})
     res.status(200).render("admin/product", {product})
 }
 

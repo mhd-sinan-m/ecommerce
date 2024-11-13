@@ -1,13 +1,13 @@
-const express = require("express");
+const express = require("express")
 const router = express()
-const admincontroller = require("../controllers/adminController");
+const admincontroller = require("../controllers/adminController")
 const productController = require("../controllers/productController")
-const adminSession = require("../middleware/adminSession");
+const adminSession = require("../middleware/adminSession")
 
 // multer
 const multer =require('multer')
 const storage = require('../utilities/multer')
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage })
 
 router.get("/", adminSession, admincontroller.dashboardGet)
 
