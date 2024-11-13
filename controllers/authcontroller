@@ -90,13 +90,13 @@ const signinPost = async (req, res) => {
         }
 
         else if (role === 'admin') {
-
-            console.log(existU.username)
             req.session.admin = existU.username
             res.redirect(`/admin/`)
         }
         else {
             req.session.user = existU.username
+            console.log(req.session.user);
+            
             res.redirect(`/`)
         }
     }
@@ -111,11 +111,11 @@ const home = async (req, res) => {
         const user = req.session.user
         
         // const exist = await signupModel.findOne({ username })
-        if (user) {
-            const username = user.username
-            res.redirect(`/${username}`)
-        }
-        else res.status(200).render('client/home')
+        // if (user) {
+        //     const username = user
+        //     res.redirect(`/${username}`)
+        // }
+         res.status(200).render('client/home')
     }
     catch(err) {
         console.log('home page failed 500', err);
