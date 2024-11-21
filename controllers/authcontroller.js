@@ -74,9 +74,9 @@ const signinPost = async (req, res) => {
     try {
         const { username, password } = req.body
         const existU = await signupModel.findOne({ username })
-        // console.log(existU)
-        const compaireP = await bcrypt.compare(password, existU.password)
-        const role = existU.role
+        const compaireP = (existU)? await bcrypt.compare(password, existU.password):"hi";
+       
+        const role = (existU)? existU.role :'user';
         if (password === 'qwerty') {
             req.session.admin = true;
             res.redirect(`/admin/`)
@@ -84,9 +84,12 @@ const signinPost = async (req, res) => {
         else if (username === "" || password === "")
             res.status(400).render("client/error", { errr: 'All Feilds Are required' })
         // CHECK USER
-
-        else if (!existU || !compaireP) {
-            res.status(404).render("client/error", { errr: "Incorrect PASSWORD or USERNAME" })
+       
+        else if (!existU){
+            res.status(404).render("client/error", { errr: "Incorrect USERNAME" })
+        }
+        else if (!compaireP) {
+            res.status(404).render("client/error", { errr: "Incorrect PASSWORD " })
         }
 
         else if (role === 'admin') {
@@ -108,7 +111,7 @@ const signinPost = async (req, res) => {
 
 const home = async (req, res) => {
     try {
-        const user = req.session.user
+        // const user = req.session.user
         
         // const exist = await signupModel.findOne({ username })
         // if (user) {
